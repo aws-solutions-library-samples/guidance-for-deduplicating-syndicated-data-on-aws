@@ -1,0 +1,211 @@
+[main]	INFO	Using ini file for selected targets
+[main]	INFO	profile include tests: None
+[main]	INFO	profile exclude tests: None
+[main]	INFO	cli include tests: None
+[main]	INFO	cli exclude tests: None
+[main]	INFO	running on Python 3.11.9
+Run started:2024-06-18 18:48:33.839602
+
+Test results:
+>> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess
+   Location: search_content/constructs/build_layer.py:11:0
+10	from constructs import Construct
+11	import os, subprocess
+12	
+
+--------------------------------------------------
+>> Issue: [B607:start_process_with_partial_path] Starting a process with a partial executable path
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html
+   Location: search_content/constructs/build_layer.py:27:12
+26	        if not os.path.isdir(dest_path):
+27	            subprocess.call(['pip', 'install',
+28	                    '-t', dest_path,
+29	                    '-r', f'{LambdaLayer.ASSET_PATH}/requirements.txt',
+30	                    '--platform', 'manylinux2014_x86_64', '--only-binary=:all:',
+31	                    '--upgrade'])
+32	
+
+--------------------------------------------------
+>> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: search_content/constructs/build_layer.py:27:12
+26	        if not os.path.isdir(dest_path):
+27	            subprocess.call(['pip', 'install',
+28	                    '-t', dest_path,
+29	                    '-r', f'{LambdaLayer.ASSET_PATH}/requirements.txt',
+30	                    '--platform', 'manylinux2014_x86_64', '--only-binary=:all:',
+31	                    '--upgrade'])
+32	
+
+--------------------------------------------------
+>> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess
+   Location: search_content/constructs/lambda_create_indices.py:14:0
+13	from typing import List, Dict, Any
+14	import json, subprocess
+15	
+
+--------------------------------------------------
+>> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess
+   Location: search_content/constructs/lambda_delta_2_queue.py:13:0
+12	from typing import List, Dict, Any
+13	import json, subprocess
+14	
+
+--------------------------------------------------
+>> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess
+   Location: search_content/constructs/lambda_deltas_enrichment.py:13:0
+12	from typing import Dict, List, Any
+13	import json, subprocess
+14	
+
+--------------------------------------------------
+>> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess
+   Location: search_content/constructs/lambda_open_search_data_load.py:14:0
+13	from typing import List
+14	import json, subprocess, os
+15	
+
+--------------------------------------------------
+>> Issue: [B607:start_process_with_partial_path] Starting a process with a partial executable path
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.9/plugins/b607_start_process_with_partial_path.html
+   Location: search_content/constructs/lambda_open_search_data_load.py:32:12
+31	        if not os.path.isdir(f'{LambdaDataLoadCfg.ASSET_PATH}/boto3'):
+32	            subprocess.call(
+33	                ['pip', 'install', '-t', f'{LambdaDataLoadCfg.ASSET_PATH}', '-r',
+34	                f'{LambdaDataLoadCfg.ASSET_PATH}/requirements.txt', '--platform', 'manylinux2014_x86_64', '--only-binary=:all:',
+35	                '--upgrade'])
+36	
+
+--------------------------------------------------
+>> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.9/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: search_content/constructs/lambda_open_search_data_load.py:32:12
+31	        if not os.path.isdir(f'{LambdaDataLoadCfg.ASSET_PATH}/boto3'):
+32	            subprocess.call(
+33	                ['pip', 'install', '-t', f'{LambdaDataLoadCfg.ASSET_PATH}', '-r',
+34	                f'{LambdaDataLoadCfg.ASSET_PATH}/requirements.txt', '--platform', 'manylinux2014_x86_64', '--only-binary=:all:',
+35	                '--upgrade'])
+36	
+
+--------------------------------------------------
+>> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess
+   Location: search_content/dataload_stack.py:7:0
+6	from constructs import Construct
+7	import subprocess
+8	
+
+--------------------------------------------------
+>> Issue: [B324:hashlib] Use of weak MD5 hash for security. Consider usedforsecurity=False
+   Severity: High   Confidence: High
+   CWE: CWE-327 (https://cwe.mitre.org/data/definitions/327.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.9/plugins/b324_hashlib.html
+   Location: search_content/lambdas/Lambda-OpenSearchDataload/lambda_function.py:81:17
+80	            md5input = region + accnumber + db_name + tname
+81	            id = hashlib.md5(md5input.encode('utf-8')).hexdigest()
+82	
+
+--------------------------------------------------
+>> Issue: [B113:request_without_timeout] Requests call without timeout
+   Severity: Medium   Confidence: Low
+   CWE: CWE-400 (https://cwe.mitre.org/data/definitions/400.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html
+   Location: search_content/lambdas/Lambda-OpenSearchDataload/lambda_function.py:99:16
+98	            print(url)
+99	            r = requests.get(url, auth=awsauth, headers=headers)
+100	            print(r.json())
+
+--------------------------------------------------
+>> Issue: [B113:request_without_timeout] Requests call without timeout
+   Severity: Medium   Confidence: Low
+   CWE: CWE-400 (https://cwe.mitre.org/data/definitions/400.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html
+   Location: search_content/lambdas/Lambda-OpenSearchDataload/lambda_function.py:104:21
+103	                print ("New Document! ID:",id)
+104	                rp = requests.put(url, auth=awsauth, data=json.dumps(data), headers=headers)
+105	                print(rp.json())
+
+--------------------------------------------------
+>> Issue: [B113:request_without_timeout] Requests call without timeout
+   Severity: Medium   Confidence: Low
+   CWE: CWE-400 (https://cwe.mitre.org/data/definitions/400.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html
+   Location: search_content/lambdas/Lambda-OpenSearchDataload/lambda_function.py:109:25
+108	                    print ("New Document! ID:",id)
+109	                    rp = requests.put(url, auth=awsauth, data=json.dumps(data), headers=headers)
+110	                    print(rp)
+
+--------------------------------------------------
+>> Issue: [B113:request_without_timeout] Requests call without timeout
+   Severity: Medium   Confidence: Low
+   CWE: CWE-400 (https://cwe.mitre.org/data/definitions/400.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html
+   Location: search_content/lambdas/Lambda-OpenSearchDataload/lambda_function.py:115:25
+114	                    print ("Some change happened, send update to OpenSearch")
+115	                    rp = requests.put(url, auth=awsauth, data=json.dumps(data), headers=headers)
+116	                    print (rp)
+
+--------------------------------------------------
+>> Issue: [B113:request_without_timeout] Requests call without timeout
+   Severity: Medium   Confidence: Low
+   CWE: CWE-400 (https://cwe.mitre.org/data/definitions/400.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.9/plugins/b113_request_without_timeout.html
+   Location: search_content/lambdas/Lambda-deltasqs2enreachment/lambda_function.py:114:13
+113	        print(url)
+114	        rp = requests.post(url, auth=vector_auth, data=json.dumps(destdata), headers=headers)
+115	        print(rp)
+
+--------------------------------------------------
+>> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.9/blacklists/blacklist_imports.html#b404-import-subprocess
+   Location: search_content/lambdas_stack.py:13:0
+12	from typing import List, Dict
+13	import json, subprocess, os
+14	
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 1612
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 11
+		Medium: 5
+		High: 1
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 5
+		Medium: 0
+		High: 12
+Files skipped (0):

@@ -1,0 +1,7 @@
+pytest==6.2.5
+boto3
+requests_aws4auth
+opensearch-py
+requests
+bandit
+cdk-nag
