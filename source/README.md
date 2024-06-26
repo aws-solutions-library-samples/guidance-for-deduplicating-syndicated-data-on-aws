@@ -74,9 +74,22 @@ cdk deploy RolesStack
 
 ## 02. SearchContentStack Deployment - *Main* account only
 
-* EXPRINCIPALS: Contains a comma separated list of *Principals* in other AWS accounts (not the *Main* account) that will be authorized to push data into the system using `OpenSearchDataload` lambda deployed with the *DataloadStack*. Note that only the AWS account number changes in this list but the complete arn needs to be set.
-`arn:aws:sts::XXXX:assumed-role/DataLoadStack-ExternalIngestionRole/OpenSearchDataload`
+* EXPRINCIPALS: Contains a comma separated list of *Principal* arn's, 3 from the *Main* account that will be used to setup the pipeline and zero or more
+ in other AWS accounts (not the *Main* account) that will be authorized to push data into the system using `OpenSearchDataload` lambda deployed with the *DataloadStack*.
+
+Template:
+--parameters SearchContentStack:EXPRINCIPALS="<main roles: 3>,<secondary roles: n>
+
+1. main roles: Only these 3 roles provided here with *Main Account Number* changed
+`arn:aws:sts::{Main Account number}:assumed-role/DataLoadStack-ExternalIngestionRole/OpenSearchDataload,arn:aws:sts::{Main Account Number}:assumed-role/LambdasStack-InternalIngestionRole/delta2q,arn:aws:sts::{Main Account Number}:assumed-role/LambdasStack-InternalEnrichmentRole/deltaq2enreachment`
+
+2. secondary roles: As many roles as *Secondary* Accounts you want to use separated by comma.
+`arn:aws:sts::{Secondary Account Number}:assumed-role/DataLoadStack-ExternalIngestionRole/OpenSearchDataload`
+
 * ADPRINCIPALS: Contains a comma separated list of *Principals* in *Main* AWS account that will be admins of the system.
+
+Template:
+--parameters SearchContentStack:ADPRINCIPALS="<main roles: 3>
 
 ```shell
 cdk deploy SearchContentStack \
@@ -108,9 +121,9 @@ This stack will be deployed in each AWS Account authorized to push data into the
 
 * region: The AWS Region where the data will be collected.
 * ingestRole: The arn of the authorized role to be used to push data. Use the pattern below with the appropriate AWS account used an *Main*.
-* osHost: The OpenSearch host where the data will be pushed.
+* osHost: The OpenSearch *Search* Collection host where the data will be pushed. Go to CloudFormation -> SearchContentStack -> Outputs to get it.
 * osIndex: The OpenSearch index name where the data will be pushed.
-* externalId: The security Id necessary to push data into OpenSearch
+* externalId: The security Id necessary to push data into OpenSearch. This value has been hardcoded in `search_content/config.py` and should be changed.
 
 ```shell
 cdk deploy DataLoadStack \
