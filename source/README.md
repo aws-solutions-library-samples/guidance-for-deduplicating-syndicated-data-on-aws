@@ -89,7 +89,7 @@ Template:
 * ADPRINCIPALS: Contains a comma separated list of *Principals* in *Main* AWS account that will be admins of the system.
 
 Template:
---parameters SearchContentStack:ADPRINCIPALS="<main roles: 3>
+--parameters SearchContentStack:ADPRINCIPALS="<admin roles - n>"
 
 ```shell
 cdk deploy SearchContentStack \
