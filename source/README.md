@@ -78,12 +78,12 @@ cdk deploy RolesStack
  in other AWS accounts (not the *Main* account) that will be authorized to push data into the system using `OpenSearchDataload` lambda deployed with the *DataloadStack*.
 
 Template:
---parameters SearchContentStack:EXPRINCIPALS="<main roles: 3>,<secondary roles: n>
+--parameters SearchContentStack:EXPRINCIPALS="<main roles - 3>,<secondary roles - n>"
 
 1. main roles: Only these 3 roles provided here with *Main Account Number* changed
 `arn:aws:sts::{Main Account number}:assumed-role/DataLoadStack-ExternalIngestionRole/OpenSearchDataload,arn:aws:sts::{Main Account Number}:assumed-role/LambdasStack-InternalIngestionRole/delta2q,arn:aws:sts::{Main Account Number}:assumed-role/LambdasStack-InternalEnrichmentRole/deltaq2enreachment`
 
-2. secondary roles: As many roles as *Secondary* Accounts you want to use separated by comma.
+2. secondary roles: As many copies of this unique role per *Secondary* Account you want to use, change `Secondary Account Number` accordingly and separate each copy with a comma.
 `arn:aws:sts::{Secondary Account Number}:assumed-role/DataLoadStack-ExternalIngestionRole/OpenSearchDataload`
 
 * ADPRINCIPALS: Contains a comma separated list of *Principals* in *Main* AWS account that will be admins of the system.
@@ -94,7 +94,7 @@ Template:
 ```shell
 cdk deploy SearchContentStack \
 --parameters SearchContentStack:EXPRINCIPALS="arn:aws:sts::XXXX:assumed-role/DataLoadStack-ExternalIngestionRole/OpenSearchDataload,arn:aws:sts::YYYY:assumed-role/DataLoadStack-ExternalIngestionRole/OpenSearchDataload" \
---parameters SearchContentStack:ADPRINCIPALS="arn:aws:sts::YYYY:assumed-role/Admin/<user>-Isengard,arn:aws:sts::YYYY:assumed-role/AmazonSageMakerServiceCatalogProductsUseRole/SageMaker"
+--parameters SearchContentStack:ADPRINCIPALS="arn:aws:sts::YYYY:assumed-role/Admin/<user>,arn:aws:sts::YYYY:assumed-role/AmazonSageMakerServiceCatalogProductsUseRole/SageMaker"
 
 ```
 
