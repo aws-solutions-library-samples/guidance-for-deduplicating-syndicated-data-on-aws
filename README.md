@@ -212,6 +212,8 @@ cdk deploy DataLoadStack \
 
 * vectorIndex: is the name of the vector index deployed in *SearchContentStack*. Default: `fultable_dedup`
 
+* kmeanEndpoint: is the deployed endpoint on SageMaker using the [Train_K-Mean_Model.ipynb](source/Train_K-Mean_Model.ipynb) Jupiter notebook. Please open the Jupiter notebook in SageMaker and execute it to get the K-Means model trained and delpoyed.
+
 See `search_content/config.py` for other default details.
 
 ```shell
