@@ -184,22 +184,7 @@ cdk deploy SearchContentStack \
 ```
 
 
-### Deploy Step 03 - LambdasStack Deployment - *Main* account only
-
-* searchIndex: is the name of the search index deployed in *SearchContentStack*. Default: `raw`
-
-* vectorIndex: is the name of the vector index deployed in *SearchContentStack*. Default: `fultable_dedup`
-
-See `search_content/config.py` for other default details.
-
-```shell
-cdk deploy LambdasStack \
---parameters LambdasStack:searchIndex=raw \
---parameters LambdasStack:vectorIndex=fultable_dedup
-
-```
-
-### Deploy Step 04 - DataLoadStack Deployment - *Main* & *Secondary* accounts
+### Deploy Step 03 - DataLoadStack Deployment - *Main* & *Secondary* accounts
 
 This stack will be deployed in each AWS Account authorized to push data into the system. Deployment must be executed on each account independently by following steps: *00, 01 and 04 of this guide*.
 
@@ -217,6 +202,23 @@ cdk deploy DataLoadStack \
 --parameters DataLoadStack:osHost="https://9v6e0jlve45rb3tj4o1f.us-east-1.aoss.amazonaws.com" \
 --parameters DataLoadStack:osIndex="raw" \
 --parameters DataLoadStack:externalId="ValorExternou8n4Fh4hFSauHbsm"
+
+```
+
+
+### Deploy Step 04 - LambdasStack Deployment - *Main* account only
+
+* searchIndex: is the name of the search index deployed in *SearchContentStack*. Default: `raw`
+
+* vectorIndex: is the name of the vector index deployed in *SearchContentStack*. Default: `fultable_dedup`
+
+See `search_content/config.py` for other default details.
+
+```shell
+cdk deploy LambdasStack \
+--parameters LambdasStack:searchIndex=raw \
+--parameters LambdasStack:vectorIndex=fultable_dedup \
+--parameters LambdasStack:kmeanEndpoint=<SageMaker Endpoint> \
 
 ```
 

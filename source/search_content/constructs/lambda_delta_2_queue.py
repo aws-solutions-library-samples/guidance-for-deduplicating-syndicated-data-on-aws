@@ -46,7 +46,7 @@ class LambdaDelta2Queue(Construct):
                 'raw_host': self.parameters['search_collection_endpoint'],
                 'raw_index': self.parameters['searchIndex'].value_as_string,
                 'vector_host': self.parameters['vector_collection_endpoint'],
-                'vector_index':self.parameters['vectorIndex'].value_as_string,
+                'vector_index': self.parameters['vectorIndex'].value_as_string,
                 'q_name': Queue.NAME,
                 'remote_ingest_role': f'arn:aws:iam::{self.account}:role/{OSS.REMOTE_ACCESS_ROLE_NAME}',
                 'remote_external_id': OSS.REMOTE_EXTERNAL_ID,

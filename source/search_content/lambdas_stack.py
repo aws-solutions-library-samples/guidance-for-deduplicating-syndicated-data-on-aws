@@ -60,9 +60,13 @@ class LambdasStack(Stack):
             description="Open Search Vector Index",
             default="fultable_dedup")
 
+        kmeanEndpoint = CfnParameter(self, "kmeanEndpoint", type="String",
+            description="k-mean SageMaker endpoint")
+
         self.parameters = {
             'search_collection_endpoint': oss.search_collection.collection.attr_collection_endpoint,
             'vector_collection_endpoint': oss.vector_collection.collection.attr_collection_endpoint,
+            'kmean_endpoint': kmeanEndpoint,
             'searchIndex': searchIndex,
             'vectorIndex': vectorIndex,
         }

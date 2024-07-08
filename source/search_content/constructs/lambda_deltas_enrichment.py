@@ -44,8 +44,9 @@ class LambdaDeltasEnrichment(Construct):
             function_name=LambdaDeltasEnrichmentCfg.NAME,
             environment={
                 'env': 'dev',
-                'vector_host': self.parameters['vector_collection_endpoint'],
-                'vector_index':self.parameters['vectorIndex'].value_as_string,
+                'vector_host':    self.parameters['vector_collection_endpoint'],
+                'vector_index':   self.parameters['vectorIndex'].value_as_string,
+                'kmean_endpoint': self.parameters['kmean_endpoint'].value_as_string,
                 'vector_admin_ingest_role': f'arn:aws:iam::{self.account}:role/vectorsearch{OSS.ADMIN_ACCESS_ROLE_NAME}Normal',
                 'admin_external_id': OSS.ADMIN_EXTERNAL_ID
             },

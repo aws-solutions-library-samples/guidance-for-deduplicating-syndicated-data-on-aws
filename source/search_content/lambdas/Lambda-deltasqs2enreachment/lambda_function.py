@@ -5,6 +5,7 @@ sts_client = boto3.client("sts")
 region = os.environ['AWS_REGION']
 vector_host = os.environ['vector_host']
 vector_index = os.environ['vector_index']
+kmean_endpoint = os.environ['kmean_endpoint']
 admin_external_id = os.environ['admin_external_id']
 vector_admin_ingest_role = os.environ['vector_admin_ingest_role']
 
@@ -62,7 +63,7 @@ def sentence_to_vector(column):
 def get_kmeans_labels(vectors):
     labels = []
     runtime= boto3.client('runtime.sagemaker')
-    ENDPOINT_NAME = 'kmeans-2024-02-14-15-41-54-558'
+    ENDPOINT_NAME = kmean_endpoint
     #for vector in vectors:
     vector_string = str(vectors[0])[1:-1]
     #print(vector_string)
@@ -80,6 +81,7 @@ def lambda_handler(event, context):
     print ("Admin External Id: ",admin_external_id, sep=":<", end=">\n")
     print ("OpenSearch Vector Destination Index: ", vector_index, sep=":<", end=">\n")
     print ("OpenSearch Vector URL: ", vector_host, sep=":<", end=">\n")
+    print ("K-means Endpoint: ", kmean_endpoint, sep=":<", end=">\n")
 
     vector_auth = getAuth_assume(os_host=vector_host, role=vector_admin_ingest_role, session_id=admin_external_id)
 
