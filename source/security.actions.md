@@ -26,3 +26,12 @@ bandit --ini .bandit -r  &> security.bandit.out
 ```shell
 cdk synth
 ```
+
+## license scan
+
+```shell
+pip3 install pipreqs pip-licenses
+pipreqs .
+pip3 install -r requirements.txt
+pip-licenses > licenses.txt
+```

@@ -17,6 +17,7 @@ class ContentQueue(Construct):
             visibility_timeout=Queue.VISIBILITY_TIME_OUT,
             retention_period=Queue.RETENTION,
             encryption=sqs.QueueEncryption.SQS_MANAGED,
+            enforce_ssl=True,
             queue_name= Queue.NAME
         )
 

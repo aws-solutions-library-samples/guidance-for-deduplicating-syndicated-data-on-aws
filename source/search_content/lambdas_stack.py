@@ -47,7 +47,6 @@ class LambdasStack(Stack):
         Aspects.of(self).add(AwsSolutionsChecks())
         NagSuppressions.add_stack_suppressions(self, [{"id":"AwsSolutions-L1", "reason":"Code was tested with python 3.11"}])
         NagSuppressions.add_stack_suppressions(self, [{"id":"AwsSolutions-SQS3", "reason":"dead-letter queue not configured as this is not meant to be used for production."}])
-        NagSuppressions.add_stack_suppressions(self, [{"id":"AwsSolutions-SQS4", "reason":"Queue only usable within the AWS Account."}])
 
 
     def defineParameters(self, oss: OpenSearchConstruct):

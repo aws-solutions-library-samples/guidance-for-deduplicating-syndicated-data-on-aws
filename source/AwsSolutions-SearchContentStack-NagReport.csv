@@ -1,7 +1,4 @@
 Rule ID,Resource ID,Compliance,Exception Reason,Rule Level,Rule Info
-"AwsSolutions-VPC7","SearchContentStack/SearchVpc/OSVPC/Resource","Suppressed","Not for use in Production.","Error","The VPC does not have an associated Flow Log."
-"AwsSolutions-IAM4","SearchContentStack/RoleAdminInit/Role/Resource","Suppressed","AWSLambdaBasicExecutionRole AWS managed policy is Required.","Error","The IAM user, role, or group uses AWS managed policies."
-"AwsSolutions-IAM5","SearchContentStack/RoleAdminInit/Role/Resource","Compliant","N/A","Error","The IAM entity contains wildcard permissions and does not have a cdk-nag rule suppression with evidence for those permission."
 "AwsSolutions-IAM4","SearchContentStack/RoleAdminInit/Role/Resource","Suppressed","AWSLambdaBasicExecutionRole AWS managed policy is Required.","Error","The IAM user, role, or group uses AWS managed policies."
 "AwsSolutions-IAM5","SearchContentStack/RoleAdminInit/Role/Resource","Compliant","N/A","Error","The IAM entity contains wildcard permissions and does not have a cdk-nag rule suppression with evidence for those permission."
 "AwsSolutions-IAM5","SearchContentStack/RoleAdminInit/InlinePolicy/Resource","Suppressed","Wildcards are necessary here.","Error","The IAM entity contains wildcard permissions and does not have a cdk-nag rule suppression with evidence for those permission."
