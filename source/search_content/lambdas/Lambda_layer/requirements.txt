@@ -1,0 +1,8 @@
+# to install: run the following command
+# pip3 install -r requirements.txt --target aws-layer/python/lib/python3.7/site-packages
+
+boto3
+requests
+pandas
+opensearch-py
+requests_aws4auth
