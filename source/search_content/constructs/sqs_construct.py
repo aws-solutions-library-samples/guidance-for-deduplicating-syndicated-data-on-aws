@@ -23,23 +23,3 @@ class ContentQueue(Construct):
 
         self.arn = queue.queue_arn
         self.queue = queue
-
-        # queue.add_to_resource_policy(
-        #     iam.PolicyStatement(
-        #         effect= iam.Effect.ALLOW,
-        #         actions= [
-        #             'sqs:SendMessage',
-        #             'sqs:ReceiveMessage',
-        #             'sqs:DeleteMessage',
-        #             'sqs:GetQueueAttributes',
-        #             'sqs:GetQueueUrl'
-        #         ],
-        #         principals= [
-        #             # iam.ServicePrincipal('sqs.amazonaws.com'),
-        #             iam.ServicePrincipal('lambda.amazonaws.com')
-        #         ] # type: ignore
-        #     )
-        # )
-
-        # queue.grant_consume_messages(iam.ServicePrincipal('lambda.amazon.aws.com'))
-        # queue.grant_send_messages(iam.ServicePrincipal('lambda.amazon.aws.com'))
