@@ -1,0 +1,4 @@
+requests
+boto3
+idna
+requests-aws4auth

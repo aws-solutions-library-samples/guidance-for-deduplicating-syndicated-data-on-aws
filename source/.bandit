@@ -1,0 +1,3 @@
+# FILE: .bandit
+[bandit]
+targets = search_content,app.py
