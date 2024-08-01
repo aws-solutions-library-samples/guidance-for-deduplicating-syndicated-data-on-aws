@@ -6,58 +6,50 @@ List the top-level sections of the README template, along with a hyperlink to th
 
 ### Required
 
-1. [Overview](#overview-required)
+1. [Overview](#overview)
     - [Cost](#cost)
 2. [Prerequisites](#prerequisites)
     - [Operating System](#operating-system)
 3. [Deployment](#deployment)
-4. [Deployment Validation](#deployment-validation-required)
-5. [Running the Guidance](#running-the-guidance-required)
-6. [Next Steps](#next-steps-required)
-7. [Cleanup](#cleanup-required)
+4. [Deployment Validation](#deployment-validation)
+5. [Running the Guidance](#running-the-guidance)
+6. [Next Steps](#next-steps)
+7. [Cleanup](#cleanup)
+8.  [Authors](#authors)
 
-***Optional***
+## Overview
 
-8. [FAQ, known issues, additional considerations, and limitations](#faq-known-issues-additional-considerations-and-limitations-optional)
-9. [Revisions](#revisions-optional)
-10. [Notices](#notices-optional)
-11. [Authors](#authors-optional)
+Large Organizations often adopt Datalake concept to centralize data pertaining to different business units. Each business unit in these organizations often purchase and create data autonomously and generate large amount of duplicate datasets.
 
-## Overview (required)
+This guidance enables these large customers to find duplicate datasets in Data lakes across multiple accounts. This solution allows business users to search data tables to find same or similar datasets and enables procurement processes to access a searchable inventory and thus could avoid purchase of same data sets multiple times.
 
-1. Provide a brief overview explaining the what, why, or how of your Guidance. You can answer any one of the following to help you write this:
+![Architecture](./assets/images/archDiagram.png)
 
-    - **Why did you build this Guidance?**
-    - **What problem does this Guidance solve?**
 
-2. Include the architecture diagram image, as well as the steps explaining the high-level overview and flow of the architecture.
-    - To add a screenshot, create an ‘assets/images’ folder in your repository and upload your screenshot to it. Then, using the relative file path, add it to your README.
 
-### Cost ( required )
+### Cost
 
 [budget](https://calculator.aws/#/estimate?id=214ad9dd9ff23aa8726ec2986f2f1de5c4873b10)
 
-This section is for a high-level cost estimate. Think of a likely straightforward scenario with reasonable assumptions based on the problem the Guidance is trying to solve. Provide an in-depth cost breakdown table in this section below ( you should use AWS Pricing Calculator to generate cost breakdown ).
 
-Start this section with the following boilerplate text:
 
-_You are responsible for the cost of the AWS services used while running this Guidance. As of <month> <year>, the cost for running this Guidance with the default settings in the <Default AWS Region (Most likely will be US East (N. Virginia)) > is approximately $<n.nn> per month for processing ( <nnnnn> records )._
+You are responsible for the cost of the AWS services used while running this Guidance. As of July 2024, the cost for running this Guidance with the default settings in the  US East (N. Virginia) is approximately $1,449.30 USD per month for processing 10,000 tables over 25 AWS accounts.
 
-Replace this amount with the approximate cost for running your Guidance in the default Region. This estimate should be per month and for processing/serving resonable number of requests/entities.
-
-Suggest you keep this boilerplate text:
-_We recommend creating a [Budget](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html) through [AWS Cost Explorer](https://aws.amazon.com/aws-cost-management/aws-cost-explorer/) to help manage costs. Prices are subject to change. For full details, refer to the pricing webpage for each AWS service used in this Guidance._
-
-### Sample Cost Table ( required )
-
-**Note : Once you have created a sample cost table using AWS Pricing Calculator, copy the cost breakdown to below table and upload a PDF of the cost estimation on BuilderSpace.**
+### Sample Cost Table
 
 The following table provides a sample cost breakdown for deploying this Guidance with the default parameters in the US East (N. Virginia) Region for one month.
 
 | AWS service  | Dimensions | Cost [USD] |
 | ----------- | ------------ | ------------ |
-| Amazon API Gateway | 1,000,000 REST API calls per month  | $ 3.50month |
-| Amazon Cognito | 1,000 active users per month without advanced security feature | $ 0.00 |
+AWS Lambda | Data Loader: 31 invokations per month | $ 0.03 |
+Amazon OpenSearch Service | search: 2 Index OCU, 2 query OCU, 1 GB Index  | $ 700.82 |
+Amazon OpenSearch Service | vector: 2 Index OCU, 2 query OCU, 1 GB Index  | $ 700.82 |
+Amazon Simple Queue Service (SQS) | 1,000,000 per month | $ 0.00 |
+Amazon SageMaker on-demand Notebook| ml.c4.xlarge, 1 Data Scientist, 1 notebook 5 hours per month |$ 4.85 |
+Amazon SageMaker | 250,000 requests per month avg duration 7000 ms |$ 35.00 |
+Amazon Bedrock | 250,000 requests per month | $ 0.03 |
+AWS Lambda | Incremental Update: 31 invokations per month | $ 1.58 |
+AWS Lambda | Enrichment: 250,000 invokations per month| $ 6.17 |
 
 ## Prerequisites
 
@@ -224,82 +216,56 @@ cdk deploy LambdasStack \
 
 ```
 
-## Deployment Validation  (required)
-
-<Provide steps to validate a successful deployment, such as terminal output, verifying that the resource is created, status of the CloudFormation template, etc.>
+## Deployment Validation
 
 
-**Examples:**
+* Open CloudFormation console and verify the status of each stack deployed:
 
-* Open CloudFormation console and verify the status of the template with the name starting with xxxxxx.
-* If deployment is successful, you should see an active database instance with the name starting with <xxxxx> in        the RDS console.
-*  Run the following CLI command to validate the deployment: ```aws cloudformation describe xxxxxxxxxxxxx```
+1. RolesStack
+2. SearchContentStack
+3. DataLoadStack
+4. LambdasStack
 
-
-
-## Running the Guidance (required)
-
-<Provide instructions to run the Guidance with the sample data or input provided, and interpret the output received.>
-
-This section should include:
-
-* Guidance inputs
-* Commands to run
-* Expected output (provide screenshot if possible)
-* Output description
+* If deployment is successful, you should see a green tick mark in the terminal.
+*  Run the following CLI command to validate the deployment: ```cdk diff```
 
 
 
-## Next Steps (required)
+## Running the Guidance
 
-Provide suggestions and recommendations about how customers can modify the parameters and the components of the Guidance to further enhance it according to their requirements.
+This solution enables business users to find similar tables in documents in a single AWS account or at enterprise level.
+This solution leverages Amazon OpenSearch to store metadata information of all documents in various data lakes across multiple accounts create and store vector embeddings using Amazon bedrock and Titan model for this metadata and use K-Means model on Amazon SageMaker to find the similarities between the documents.
 
+Below diagram depicts the high-level data flow and Architecture Building Blocks to achieve this goal.
 
-## Cleanup (required)
+![diagram](./assets/images/Picture1.png)
 
-- Include detailed instructions, commands, and console actions to delete the deployed Guidance.
-- If the Guidance requires manual deletion of resources, such as the content of an S3 bucket, please specify.
-
-
-
-## FAQ, known issues, additional considerations, and limitations (optional)
-
-
-**Known issues (optional)**
-
-<If there are common known issues, or errors that can occur during the Guidance deployment, describe the issue and resolution steps here>
+1. At Data Load each AWS account with data stored could independently and with full autonomy participate in the solution. Opting in or out at will and without overhead in current operations
+2. Then the data needs to be classified to be ready for queries. Classification leverage Vector embedding
+3. Then the vectorized data labeled using a pre-trained K-Mean model.
+4. The enriched data stored in a vector database for easy access and query
+5. Vector database enables users to easily find tables that similar to each other using the k-mean labels as well as run at hock queries for column names to find similar tables the organization already have.
+   
+As part of the initial setup after Vector Embedding (Step2), a K-Mean model need to be trained on the raw dataset loaded by the data loader. Overtime retraining the K-Mean model would improve data labeling more accurate.
 
 
-**Additional considerations (if applicable)**
+## Next Steps
 
-<Include considerations the customer must know while using the Guidance, such as anti-patterns, or billing considerations.>
+Add Data loader for each AWS account in the organization and adjust the configuration options in AWS CDK as needed.
 
-**Examples:**
+Schedule `Data loader` and `Incremental update` to run once a day. 
 
-- “This Guidance creates a public AWS bucket required for the use-case.”
-- “This Guidance created an Amazon SageMaker notebook that is billed per hour irrespective of usage.”
-- “This Guidance creates unauthenticated public API endpoints.”
+## Cleanup
 
+Run `cdk destroy --all` on the terminal to remove all deployed resources per AWS Account.
 
-Provide a link to the *GitHub issues page* for users to provide feedback.
+You can also delete the CloudFormation Stacks from the Console.
 
-
-**Example:** *“For any feedback, questions, or suggestions, please use the issues tab under this repo.”*
-
-## Revisions (optional)
-
-Document all notable changes to this project.
-
-Consider formatting this section based on Keep a Changelog, and adhering to Semantic Versioning.
-
-## Notices (optional)
-
-Include a legal disclaimer
-
-**Example:**
-*Customers are responsible for making their own independent assessment of the information in this Guidance. This Guidance: (a) is for informational purposes only, (b) represents AWS current product offerings and practices, which are subject to change without notice, and (c) does not create any commitments or assurances from AWS and its affiliates, suppliers or licensors. AWS products or services are provided “as is” without warranties, representations, or conditions of any kind, whether express or implied. AWS responsibilities and liabilities to its customers are controlled by AWS agreements, and this Guidance is not part of, nor does it modify, any agreement between AWS and its customers.*
+## Authors
 
 
-## Authors (optional)
+Akos Jancsik
 
-Name of code contributors
+Ruben Hernandez
+
+Ashish Vashisht
