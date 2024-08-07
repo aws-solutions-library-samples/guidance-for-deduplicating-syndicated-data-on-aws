@@ -1,4 +1,4 @@
-# Guidance for Mastering Syndicated Data on AWS
+# Guidance for Deduplicating Syndicated Data on AWS
 
 ## Table of Content
 
@@ -245,7 +245,7 @@ Below diagram depicts the high-level data flow and Architecture Building Blocks 
 3. Then the vectorized data labeled using a pre-trained K-Mean model.
 4. The enriched data stored in a vector database for easy access and query
 5. Vector database enables users to easily find tables that similar to each other using the k-mean labels as well as run at hock queries for column names to find similar tables the organization already have.
-   
+
 As part of the initial setup after Vector Embedding (Step2), a K-Mean model need to be trained on the raw dataset loaded by the data loader. Overtime retraining the K-Mean model would improve data labeling more accurate.
 
 
@@ -253,7 +253,7 @@ As part of the initial setup after Vector Embedding (Step2), a K-Mean model need
 
 Add Data loader for each AWS account in the organization and adjust the configuration options in AWS CDK as needed.
 
-Schedule `Data loader` and `Incremental update` to run once a day. 
+Schedule `Data loader` and `Incremental update` to run once a day.
 
 ## Cleanup
 
