@@ -13,7 +13,7 @@ from search_content.constructs.lambda_open_search_data_load import LambdaDataloa
 class DataLoadStack(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, role:_iam.Role ) -> None:
-        super().__init__(scope, construct_id)
+        super().__init__(scope, construct_id, description="Guidance for Deduplicating Syndicated data on AWS (SO9509)")
 
         self.defineParameters()
         dataloadFn = LambdaDataload(self, "dataload", self.parameters, role)
