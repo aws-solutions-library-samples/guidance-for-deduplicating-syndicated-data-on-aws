@@ -1,4 +1,4 @@
-pytest==6.2.5
+pytest==9.0.3
 boto3
 requests_aws4auth
 opensearch-py
